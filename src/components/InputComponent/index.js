@@ -1,41 +1,23 @@
 import { COLORS, FONTS, SIZES } from '@app/constants/themes'
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
 
 import React from 'react'
+import { scaling } from '@app/constants/scaling'
 
-const InputComponent = ({ isPicker = false, onPress, error = false, ...props }) => {
+const InputComponent = ({ onPress, error = false, ...props }) => {
     return (
         <View style={[styles.container, props.container]}>
             {props.label && <Text style={[styles.labelTextStyle, props.labelTextStyle]}>{props.label}</Text>}
-
-            {
-                isPicker === true ?
-                    <Pressable
-                        onPress={() => onPress()}
-                        style={[styles.inputContainer(error), props.inputContainer]}>
-                        {props.prepIcon}
-                        <Text
-                            numberOfLines={1}
-                            style={[
-                                styles.inputStyle,
-                                props.inputStyle,
-                                { color: props?.value ? COLORS.black : COLORS.placeholderColorTwo, marginLeft: 3 }]}>
-                            {props?.value ? props?.value : props?.placeholder}
-                        </Text>
-                        {props.appendIcon}
-                    </Pressable>
-                    :
-                    <View style={[styles.inputContainer(error), props.inputContainer]}>
-                        {props.prepIcon}
-                        <TextInput
-                            placeholderTextColor={COLORS.placeholderColorTwo}
-                            style={[styles.inputStyle, props.inputStyle]}
-                            returnKeyType={'done'}
-                            {...props}
-                        />
-                        {props.appendIcon}
-                    </View>
-            }
+            <View style={[styles.inputContainer(error), props.inputContainer]}>
+                {props.prepIcon}
+                <TextInput
+                    placeholderTextColor={COLORS.placeholderColorTwo}
+                    style={[styles.inputStyle, props.inputStyle]}
+                    returnKeyType={'done'}
+                    {...props}
+                />
+                {props.appendIcon}
+            </View>
         </View>
     )
 }
@@ -44,29 +26,29 @@ export default InputComponent
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: SIZES.base * 2.7,
+        marginTop: scaling(SIZES.base * 2),
     },
     labelTextStyle: {
         ...FONTS.body2,
         color: COLORS.black,
-        fontSize: 16,
-        lineHeight: 19.5
+        fontSize: scaling(16),
+        lineHeight: scaling(19)
     },
     inputContainer: (error) => ({
-        paddingHorizontal: SIZES.base * 2,
+        paddingHorizontal: scaling(SIZES.base * 2),
         borderWidth: 1,
-        borderColor: error ? COLORS.error : COLORS.borderThree,
-        borderRadius: 6,
-        marginTop: SIZES.base,
+        borderColor: error ? COLORS.error : COLORS.borderTwo,
+        borderRadius: scaling(SIZES.base),
+        marginTop: scaling(SIZES.base),
         flexDirection: 'row',
         alignItems: 'center',
-        height: 46
+        height: scaling(46)
     }),
     inputStyle: {
         ...FONTS.body4,
         flex: 1,
         color: COLORS.black,
-        fontSize: 14,
-        lineHeight: 17.07
+        fontSize: scaling(14),
+        lineHeight: scaling(17)
     }
 })

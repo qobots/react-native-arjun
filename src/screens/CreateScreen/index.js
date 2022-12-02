@@ -37,6 +37,7 @@ const CreateScreen = ({ navigation }) => {
 
     const onCreateUser = async (values) => {
         await dispatch(createUser(values));
+        navigation.goBack();
     }
 
     function renderHeader() {

@@ -21,6 +21,7 @@ Usage
     * npm install
     * cd ios 
     * pod install
+    * npx react-native-asset // to link assets with platform
 
 2) How to run
 
